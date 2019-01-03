@@ -32,20 +32,3 @@ RUN apt-get update -y && \
 ## uwsgi
 RUN pip3 install uwsgi
 
-RUN apt-get update -y && apt-get install -y wget
-WORKDIR /root
-RUN wget https://dl.google.com/go/go1.11.4.linux-amd64.tar.gz -O go.tar.gz
-RUN tar -C /usr/local -xzf go.tar.gz
-ENV PATH=$PATH:/usr/local/go/bin
-ENV GOROOT=/usr/local/go
-ENV GOPATH=/usr/local/go_path
-ENV PATH=$PATH:/usr/local/go_path/bin
-RUN mkdir -p /usr/local/go_path
-RUN go get github.com/astaxie/beego 
-RUN go get github.com/beego/bee && go install github.com/beego/bee
-RUN mkdir -p /usr/local/go_path/src
-WORKDIR /usr/local/go_path/src
-RUN git clone https://github.com/hexiaoyun128/ERP.git goERP
-RUN cd goERP/web_pc && npm install && npm run build
-RUN cd goERP && go get ./...
-
