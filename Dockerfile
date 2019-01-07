@@ -1,9 +1,13 @@
 from ubuntu:16.04
 ADD ./sources.list /etc/apt/sources.list
 
-RUN apt-get update -y && \
-    apt-get install -y python3 python3-pip && \
-    apt-get install -y libmysqlclient-dev 
+RUN apt-get update && \
+    apt-get install -y software-properties-common && \
+    add-apt-repository ppa:jonathonf/python-3.6 && \
+    apt-get update && \
+    apt-get install -y python3.6 python3.6-dev python3-pip && \
+    apt-get install -y libmysqlclient-dev && \
+    mv /usr/bin/python3.6 /usr/bin/python3
 
 ## 时区
 RUN apt-get update -y && apt-get install -y tzdata
@@ -30,5 +34,5 @@ RUN apt-get update -y && \
 
 
 ## uwsgi
-RUN pip3 install uwsgi
+#RUN pip3 install uwsgi
 
