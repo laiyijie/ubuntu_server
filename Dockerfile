@@ -34,5 +34,5 @@ RUN apt-get update -y && \
 
 
 ## uwsgi
-#RUN pip3 install uwsgi
+RUN pip3 install uwsgi
 
